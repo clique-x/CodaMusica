@@ -271,7 +271,7 @@ fork {
                     \atk, 0.05, \sus, dur * 0.5, \rel, dur * 1.5,
                     \modIdx,   3.5 + (~stage * 0.3),
                     \modRatio, [1.5, 2.0, 2.01, 3.0, 2.5].choose,
-                    \wobble,   0.18 + LFNoise0.kr(0.2).range(0, 0.3),
+                    \wobble,   rrand(0.18, 0.48),
                     \pan, rrand(-0.55, 0.55)
                 ], ~srcGrp);
             };

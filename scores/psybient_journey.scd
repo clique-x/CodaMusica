@@ -272,7 +272,7 @@ s.sync;   // wait — groups now confirmed alive on server
                 \atk, 0.08, \sus, dur * 0.6, \rel, dur * 1.2,
                 \modIdx,   2.5 + (~stage * 0.5),
                 \modRatio, [1.5, 2.0, 2.5, 3.0].choose,
-                \wobble,   0.2 + LFNoise0.kr(0.1).range(0, 0.4),
+                \wobble,   rrand(0.2, 0.6),
                 \pan, rrand(-0.5, 0.5)
             ], ~srcGroup);
         };
