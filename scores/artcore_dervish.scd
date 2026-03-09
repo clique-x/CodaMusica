@@ -194,9 +194,9 @@ fork {
             };
 
             // Off-beat accent kick in stages 2-3
-            if(~stage >= 2 && kickEvery == 4) {
+            if((~stage >= 2) && (kickEvery == 4)) {
                 (~beat * 2).wait;
-                if(p[0] > 0.1 && 0.5.coin) {
+                if((p[0] > 0.1) && 0.5.coin) {
                     Synth(\psyKick, [
                         \out, 0, \amp, p[0] * 0.35,
                         \punch, 100, \body, 50, \tail, 0.4
@@ -292,9 +292,9 @@ fork {
             32.do { |i|
                 var fire = case
                     { ~stage == 0 } { false }
-                    { ~stage == 1 } { [7, 23].includes(i) && 0.5.coin }
-                    { ~stage == 2 } { [0,8,16,24].includes(i) || ([3,11,19,27].includes(i) && 0.5.coin) }
-                    { ~stage == 3 } { (i % 4 == 0) || ((i % 4 == 2) && 0.6.coin) || (0.2.coin) }
+                    { ~stage == 1 } { [7, 23].includes(i) && 0.5.coin.value }
+                    { ~stage == 2 } { [0,8,16,24].includes(i) || ([3,11,19,27].includes(i) && 0.5.coin.value) }
+                    { ~stage == 3 } { (i % 4 == 0) || ((i % 4 == 2) && 0.6.coin.value) || (0.2.coin) }
                     { ~stage == 4 } { [0, 16].includes(i) || (0.1.coin) };
 
                 if(fire && (amp > 0.02)) {
@@ -322,7 +322,7 @@ fork {
                 .format(i, ~stageNames[i], ~bpm).postln;
 
             // Riser before stages 1-3
-            if(i > 0 && i < 4) {
+            if((i > 0) && (i < 4)) {
                 Synth(\artRiser, [
                     \out, 0, \amp, 0.18, \dur, 7.0,
                     \loFreq, [55, 80, 120, 200][i-1],

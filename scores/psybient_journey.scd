@@ -184,7 +184,7 @@ s.sync;   // wait — groups now confirmed alive on server
         };
 
         // In stage 2+: add subtle off-beat accent every 2 kicks
-        if(~stage >= 2 && beatCount.even && 0.3.coin) {
+        if((~stage >= 2) && beatCount.even && 0.3.coin) {
             (period * 0.5 * ~beat).wait;
             if(~stageParams[~stage][0] > 0.1) {
                 Synth(\kickPulse, [\out, 0, \amp, ~stageParams[~stage][0] * 0.4,
@@ -293,7 +293,7 @@ s.sync;   // wait — groups now confirmed alive on server
         16.do { |i|
             var fire = case
                 { ~stage <= 0 } { false }
-                { ~stage == 1 } { i == 8 && 0.4.coin }
+                { ~stage == 1 } { (i == 8) && 0.4.coin }
                 { ~stage == 2 } { [0,4,8,12].includes(i) || (0.2.coin) }
                 { ~stage == 3 } { [0,3,6,9,12,15].includes(i) || (0.35.coin) }
                 { ~stage == 4 } { [0, 8].includes(i) || (0.15.coin) };
