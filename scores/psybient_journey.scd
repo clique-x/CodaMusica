@@ -25,6 +25,19 @@
 
 (
 // ─────────────────────────────────────────────────────────────
+// CLEANUP — stop any previous run before starting fresh
+// ─────────────────────────────────────────────────────────────
+[~padRoutine, ~shimmerRoutine, ~kickRoutine, ~bassRoutine,
+ ~leadRoutine, ~hatRoutine, ~stageController, ~macroClock].do { |r|
+    if(r.notNil) { r.stop }
+};
+if(~droneSynth.notNil)  { ~droneSynth.free  };
+if(~reverbSynth.notNil) { ~reverbSynth.free };
+if(~delaySynth.notNil)  { ~delaySynth.free  };
+if(~fxGroup.notNil)     { ~fxGroup.free      };
+if(~srcGroup.notNil)    { ~srcGroup.free     };
+
+// ─────────────────────────────────────────────────────────────
 // GLOBALS
 // ─────────────────────────────────────────────────────────────
 ~bpm         = 104;
@@ -73,10 +86,13 @@
 };
 
 // ─────────────────────────────────────────────────────────────
-// BOOT EFFECTS CHAIN
+// BOOT EFFECTS CHAIN — inside fork so s.sync guarantees groups
+// exist on the server before any Synth() targets them
 // ─────────────────────────────────────────────────────────────
-~fxGroup = Group.head(s);
+fork {
+~fxGroup  = Group.head(s);
 ~srcGroup = Group.after(~fxGroup);
+s.sync;   // wait — groups now confirmed alive on server
 
 // Reverb + Delay always running, fed by ~reverbBus / ~delayBus
 ~reverbSynth = Synth(\globalReverb, [\in, ~reverbBus, \out, 0, \mix, 0.65, \room, 0.97], ~fxGroup);
@@ -357,6 +373,8 @@
 "║   ~journey.value  →  stop everything   ║".postln;
 "╚══════════════════════════════════════════╝".postln;
 "".postln;
+
+}; // ← closes fork
 )
 
 

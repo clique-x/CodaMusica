@@ -3,7 +3,9 @@
 // ═════════════════════════════════════════════════════════════
 
 (
-// ── Effects buses (create before synths) ─────────────────────
+// ── Effects buses — free old ones first if reloading ─────────
+if(~reverbBus.notNil) { ~reverbBus.free };
+if(~delayBus.notNil)  { ~delayBus.free  };
 ~reverbBus = Bus.audio(s, 2);
 ~delayBus  = Bus.audio(s, 2);
 
