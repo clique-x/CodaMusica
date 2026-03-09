@@ -282,7 +282,7 @@
                 { ~stage == 3 } { [0,3,6,9,12,15].includes(i) || (0.35.coin) }
                 { ~stage == 4 } { [0, 8].includes(i) || (0.15.coin) };
 
-            if(fire && amp > 0.02) {
+            if(fire && (amp > 0.02)) {
                 Synth(\hat, [
                     \out, 0, \amp, amp * rrand(0.6, 1.2),
                     \dur, rrand(0.04, 0.14),

@@ -29,7 +29,7 @@
     // Random walk on a scale — returns next degree given current
     // weights: stay near current position (Gaussian-ish)
     walk: { |current, size, stepSize=2|
-        var step = ((-stepSize..stepSize).choose);
+        var step = ((stepSize.neg..stepSize).choose);
         (current + step).clip(0, size - 1)
     }
 );
